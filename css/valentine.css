@@ -37,3 +37,33 @@ img {
   border: 2px solid #ff9494;
   box-shadow: 1px 1px 2px #ffe3e1;
 }
+
+.image-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* space between images */
+  margin: 20px 0;
+}
+
+.image-row img {
+  height: 300px;   /* adjust as you like */
+  width: auto;
+  border-radius: 16px;
+}
+
+.falling-flower {
+  position: fixed;
+  top: -50px;
+  font-size: 24px;
+  pointer-events: none; /* clicks go through */
+  animation: fall linear forwards;
+  z-index: 999;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
