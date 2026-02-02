@@ -265,14 +265,15 @@ body{
     bottom: 4vmin;
     animation:flower-fall-down-purple  6s 1.2s linear forwards, flower-falling 6s 7.2s linear infinite;
 }
-
 .audio-container {
-  margin-top: 50px;
   text-align: center;
-}
-.telegram-button {
   margin-top: 20px;
+}
+
+.telegram-button {
   text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .telegram-button button {
@@ -286,6 +287,14 @@ body{
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   animation: pulse 1.2s infinite;
 }
+
+html, body {
+  height: auto;        /* do NOT fix the height */
+  overflow-y: auto;    /* allow vertical scrolling */
+  margin: 0;
+  padding: 0;
+}
+
 
 @keyframes pulse {
   0% { transform: scale(1); }

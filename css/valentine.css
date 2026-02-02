@@ -67,3 +67,16 @@ img {
     opacity: 0;
   }
 }
+
+.please-wrapper {
+  text-align: center;       /* centers content horizontally */
+  margin-top: 20px;         /* optional spacing from above */
+}
+
+.responsive {
+  height: 498px;            /* your desired height */
+  width: 150px;             /* your desired width */
+  max-width: 100%;          /* responsive on small screens */
+  height: auto;             /* keeps aspect ratio */
+  display: inline-block;    /* ensures text-align center works */
+}
