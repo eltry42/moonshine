@@ -7,79 +7,109 @@
     <link rel="stylesheet" href="css/valentine.css" />
   </head>
   <body>
-    <div class="image-row">
-        <img src="bab.png" alt="valentine left" />
-        <img src="me.png" alt="valentine right" />
-    </div>
-    <div id="valentineQuestion"><b>Princess Halin, Will you be my valentine xx?</b></div>
-    <button class="answerButton" onclick="location.href='lastpage.html'">
-      Yes
-    </button>
-    <button class="answerButton" id="noButton">I don't wanna o(╥﹏╥)o</button>
-    <br />
-    <div class="please-wrapper">
-        <img src="please.png" alt="cat asking question" class="responsive" />
+    <!-- COUNTDOWN OVERLAY -->
+    <div id="countdown-overlay">
+      <div id="countdown-number">10</div>
     </div>
 
+    <!-- MAIN PAGE CONTENT -->
+    <div class="image-row">
+      <img src="bab.png" alt="valentine left" />
+      <img src="me.png" alt="valentine right" />
+    </div>
+
+    <div id="valentineQuestion">
+      <b>Princess Halin, Will you be my valentine xx?</b>
+    </div>
+
+    <button class="answerButton" onclick="location.href='lastpage.html'">Yes</button>
+    <button class="answerButton" id="noButton">I don't wanna o(╥﹏╥)o</button>
+
+    <div class="please-wrapper">
+      <img src="please.png" alt="cat asking question" class="responsive" />
+    </div>
+
+    <!-- AUDIO -->
+    <div class="audio-container">
+      <audio id="valentine-audio" controls loop>
+        <source src="yay.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
 
     <script>
-        const noMessages = [
-            "Are you sure? 🥺",
-            "Pls think again 💔",
-            "Daddy is getting angry !!!😡",
-            "Okay but what if… 👉👈",
-            "You’re breaking my heart 💘",
-        ];
+      // ===============================
+      // 1️⃣ Countdown Logic
+      // ===============================
+      window.onload = () => {
+        let count = 10;
+        const countdownNumber = document.getElementById("countdown-number");
+        const countdownOverlay = document.getElementById("countdown-overlay");
+        const countdownInterval = setInterval(() => {
+          count--;
+          if (count > 0) {
+            countdownNumber.textContent = count;
+          } else {
+            clearInterval(countdownInterval);
+            countdownOverlay.style.display = "none";
+            document.getElementById("valentine-audio").play(); // autoplay after countdown
+          }
+        }, 1000);
+      };
 
-        let noClickCount = 0;
-        const maxNoClicks = 6;
+      // ===============================
+      // 2️⃣ YES/NO Button Logic
+      // ===============================
+      const noMessages = [
+        "Are you sure? 🥺",
+        "Pls think again 💔",
+        "Daddy is getting angry !!!😡",
+        "Okay but what if… 👉👈",
+        "You’re breaking my heart 💘"
+      ];
 
-        const noButton = document.getElementById("noButton");
-        const yesButton = document.querySelector(
-            'button[onclick*="lastpage.html"]'
-        );
+      let noClickCount = 0;
+      const maxNoClicks = 6;
 
-        noButton.addEventListener("click", function () {
-            // Grow YES button
-            const currentFontSize = parseInt(
-            window.getComputedStyle(yesButton).fontSize
-            );
-            yesButton.style.fontSize = currentFontSize + 10 + "px";
+      const noButton = document.getElementById("noButton");
+      const yesButton = document.querySelector('button[onclick*="lastpage.html"]');
 
-            // Change NO button text
-            this.textContent = noMessages[noClickCount];
+      noButton.addEventListener("click", function () {
+        // Grow YES button
+        const currentFontSize = parseInt(window.getComputedStyle(yesButton).fontSize);
+        yesButton.style.fontSize = currentFontSize + 10 + "px";
 
-            noClickCount++;
+        // Change NO button text
+        this.textContent = noMessages[noClickCount];
+        noClickCount++;
 
-            // Disable after 6 clicks
-            if (noClickCount >= maxNoClicks) {
-            this.disabled = true;
-            this.textContent = "No more no ALLOWED 😤";
-            this.style.opacity = "0.5";
-            this.style.cursor = "not-allowed";
-            }
-        });
-
-        function createFlower() {
-            const flower = document.createElement("div");
-            flower.classList.add("falling-flower");
-            const flowers = ["🌸", "🌹", "🌺", "💐"];
-            flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
-
-            flower.style.left = Math.random() * 100 + "vw";
-            flower.style.animationDuration = 3 + Math.random() * 4 + "s";
-            flower.style.fontSize = 16 + Math.random() * 24 + "px";
-
-            document.body.appendChild(flower);
-
-            // Remove after animation
-            setTimeout(() => {
-            flower.remove();
-            }, 7000);
+        // Disable after 6 clicks
+        if (noClickCount >= maxNoClicks) {
+          this.disabled = true;
+          this.textContent = "No more no ALLOWED 😤";
+          this.style.opacity = "0.5";
+          this.style.cursor = "not-allowed";
         }
+      });
 
-        // Spawn flowers continuously
-        setInterval(createFlower, 100);
+      // ===============================
+      // 3️⃣ Falling Flowers
+      // ===============================
+      function createFlower() {
+        const flower = document.createElement("div");
+        flower.classList.add("falling-flower");
+        const flowers = ["🌸", "🌹", "🌺", "💐"];
+        flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+
+        flower.style.left = Math.random() * 100 + "vw";
+        flower.style.animationDuration = 3 + Math.random() * 4 + "s";
+        flower.style.fontSize = 16 + Math.random() * 24 + "px";
+
+        document.body.appendChild(flower);
+
+        setTimeout(() => flower.remove(), 7000);
+      }
+
+      setInterval(createFlower, 100);
     </script>
   </body>
 </html>
