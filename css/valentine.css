@@ -69,13 +69,18 @@ img {
 }
 
 .please-wrapper {
-  text-align: center;       /* centers content horizontally */
-  margin-top: 20px;         /* optional spacing from above */
+  text-align: center;
+  margin-top: 20px;
+  min-height: 300px;   /* ensures space for layout without cropping image */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* vertically center inside wrapper */
+  flex-direction: column;
 }
 
 .responsive {
-  height: 498px;            /* your desired height */
-  width: 150px;             /* your desired width */
+  height: 500px;            /* your desired height */
+  width: 400px;             /* your desired width */
   max-width: 100%;          /* responsive on small screens */
   height: auto;             /* keeps aspect ratio */
   display: inline-block;    /* ensures text-align center works */
